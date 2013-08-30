@@ -78,7 +78,7 @@
 		<h1>Welcome to the Alpha Tool</h1>
 		<p>- This is an RMIT Student Project for WDA (Sem-2 2013) -</p>
 
-		<form name="myForm" onsubmit="return validateForm()" action= "partB_results.php" method="GET">
+		<form name="myForm" onsubmit="return validateForm()" action= "partB_ResultPage.php" method="GET">
 
 			<table style="border-style:solid;border-width:5px;">
 				<tr> 

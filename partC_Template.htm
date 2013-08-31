@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>MiniTemplator Results PartC</title>
+    <style>
+    table,th,td
+    {
+        border:1px solid green;
+    }
+    </style>
+</head>
+
+<body>
+
+<h3>MiniTemplator Sample 1</h3>
+
+<table>
+	<tr>
+        <th>Wine ID</th>
+        <th>Wine Name</th>
+        <th>Grape Variety</th>
+        <th>Year</th>
+        <th>Winery Name</th>
+        <th>Region</th>
+        <th>Cost per Bottle</th>
+        <th>Stock On Hand</th>
+        <th>Sum Sold Quantity</th>
+        <th>Sum Sold Items</th>
+    </tr>
+
+<!-- $BeginBlock block1 -->
+
+	<tr>
+        <th>${Wine_ID}</th>
+        <th>${Wine_Name}</th>
+        <th>${Grape_Variety}</th>
+        <th>${Year}</th>
+        <th>${Winery_Name}</th>
+        <th>${Region}</th>
+        <th>${Cost_per_Bottle}</th>
+        <th>${Stock_On_Hand}</th>
+        <th>${Sum_Sold_Quantity}</th>
+        <th>${Sum_Sold_Items}</th>
+    </tr>
+
+<!-- $EndBlock block1 -->
+
+</table>
+
+</body>
+</html>

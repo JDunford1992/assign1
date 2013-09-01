@@ -1,3 +1,15 @@
+<?php 
+session_start(); 
+if(isset($_GET['startSession'])) {
+    $_SESSION['started'] = true;
+} 
+else if(isset($_GET['endSession'])) {
+    $_SESSION['started'] = false;
+    unset($_SESSION['started']);
+    session_destroy();
+} 
+?>
+
 <html>
 <head>
 	<title>Winestore Form Input Page</title>
@@ -59,6 +71,18 @@
 </head>
 
 <body>
+
+	<?php if (!isset($_SESSION['started'])) {
+		echo '<a href="?startSession"> Start A Session </a>';
+	}
+	else
+	{
+		echo 'Session Started';
+		echo ' | ';
+		echo '<a href="?endSession"> End Session </a>';
+	}
+	?>
+
 	<?php
 	require_once('db.php');
 	if(!$dbconn = mysql_connect(DB_HOST, DB_USER, DB_PW)) 
@@ -78,7 +102,7 @@
 		<h1>Welcome to the Alpha Tool</h1>
 		<p>- This is an RMIT Student Project for WDA (Sem-2 2013) -</p>
 
-		<form name="myForm" onsubmit="return validateForm()" action= "partD_Results.php" method="GET">
+		<form name="myForm" onsubmit="return validateForm()" action= "partE_Results.php" method="GET">
 
 			<table style="border-style:solid;border-width:5px;">
 				<tr> 

@@ -1,3 +1,16 @@
+<?php 
+session_start(); 
+
+if (isset($_SESSION['started']))
+{
+    //Do stuff
+  echo "SESSION TRACKING IS HAPPENING";
+
+  // //MAKES AN ARRAY
+  $sessionArray = array('$sessionVariable');
+}
+?>
+
 <html>
 <head>
   <title>Winestore Results Page</title>
@@ -7,9 +20,13 @@
 		border:1px solid green;
 	}
 	</style>
+<a href="https://twitter.com/intent/tweet?screen_name=Dunford1992" class="twitter-share-button" data-lang="en" data-size="large">Tweet to @Dunford1992</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 </head>
 
 <body>
+
 
 	<?php
 
@@ -144,8 +161,6 @@ try {
   }
   //////////////////////////BINDING END//////////////////////////
 
-  
-
   //////////////////////////EXECUTE START/////////////////////
 
   $statement->execute();
@@ -154,12 +169,23 @@ try {
 
   require_once ("MiniTemplator.class.php");
         $t = new MiniTemplator;
-        $t->readTemplateFromFile ("partD_Template.htm");
+        $t->readTemplateFromFile ("partE_Template.htm");
 
   while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
     
     $t->setVariable ("Wine_ID","{$row["wine_id"]}");
       $t->setVariable ("Wine_Name","{$row["wine_name"]}");
+
+////////////////////ADDING VALUES TO THE SESSION ARRAY VARIABLE START////////////////////
+
+      if (isset($_SESSION['started'])){
+
+      $sessionVariable .= $row["wine_name"]. "\n";
+
+    }
+
+////////////////////ADDING VALUES TO THE SESSION ARRAY VARIABLE END////////////////////
+
       $t->setVariable ("Grape_Variety","{$row["variety"]}");
       $t->setVariable ("Year","{$row["year"]}");
       $t->setVariable ("Winery_Name","{$row["winery_name"]}");
@@ -173,6 +199,23 @@ try {
 
   } // end while loop body
   $t->generateOutput();
+
+  //NUMBER OF ROWS FOUND
+
+  $rowsFound = $statement->rowCount();
+
+  print "{$rowsFound} records found matching your criteria<br>";
+
+  print "---------------------------------------------------------------------------- Previous Wine Names returned: ----------------------------------------------------------------------------";
+
+  //  // adds it to our session 
+  $_SESSION['wine_namesArrary'] .=  $sessionVariable;
+
+  /////////////LET THE USER VIEW THE PREVIOUS RETURNED WINE NAME START///////////// 
+
+  echo $_SESSION['wine_namesArrary'];
+  
+  /////////////LET THE USER VIEW THE PREVIOUS RETURNED WINE NAME END///////////// 
 
   // close the connection by destroying the object
   $pdo = null;
